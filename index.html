@@ -5,41 +5,94 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Do You Love Me?</title>
     <style>
-        body { display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background-color: #ffe6e6; font-family: sans-serif; overflow: hidden; }
-        .container { text-align: center; background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); width: 80%; }
-        h1 { color: #ff4d4d; font-size: 1.8rem; }
-        .buttons { margin-top: 30px; position: relative; height: 150px; }
-        button { padding: 12px 25px; font-size: 1.1rem; cursor: pointer; border: none; border-radius: 10px; transition: 0.2s; }
-        #yesBtn { background-color: #ff4d4d; color: white; position: relative; z-index: 10; }
-        #noBtn { background-color: #888; color: white; position: absolute; left: 50%; margin-left: 10px; }
-        .success-msg { display: none; font-size: 1.3rem; color: #ff4d4d; font-weight: bold; line-height: 1.6; }
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #ffeef2;
+            font-family: 'Khmer OS Battambang', sans-serif;
+            overflow: hidden;
+            text-align: center;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            z-index: 10;
+        }
+        h1 { color: #d63384; font-size: 28px; }
+        .buttons { margin-top: 30px; position: relative; }
+        button {
+            padding: 15px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin: 10px;
+        }
+        #yesBtn { background-color: #ff4d6d; color: white; }
+        #noBtn { background-color: #6c757d; color: white; position: absolute; }
+        
+        /* Effect បេះដូង */
+        .heart {
+            position: fixed;
+            top: -10px;
+            color: #ff4d6d;
+            font-size: 20px;
+            animation: fall linear forwards;
+            z-index: 1;
+        }
+        @keyframes fall {
+            to { transform: translateY(105vh); }
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div id="mainContent">
-            <h1 id="question">តើអ្នកស្រឡាញ់ខ្ញុំទេ? ❤️</h1>
-            <div class="buttons">
-                <button id="yesBtn" onclick="sayYes()">បាទ/ចាស</button>
-                <button id="noBtn" onmouseover="moveButton()" onclick="moveButton()">ទេ</button>
-            </div>
-        </div>
-        <div id="message" class="success-msg">យេ! ខ្ញុំក៏ស្រឡាញ់អ្នកដែរ! 🥰<br>ជួបគ្នានៅថ្ងៃស្អែកណា៎!</div>
+
+<div class="container" id="mainContainer">
+    <h1 id="question">តើអ្នកស្រឡាញ់ខ្ញុំទេ? ❤️</h1>
+    <div class="buttons">
+        <button id="yesBtn" onclick="sayYes()">បាទ/ចាស</button>
+        <button id="noBtn" onmouseover="moveButton()">ទេ</button>
     </div>
-    <script>
-        function moveButton() {
-            const btn = document.getElementById('noBtn');
-            const x = Math.random() * (window.innerWidth - btn.offsetWidth);
-            const y = Math.random() * (window.innerHeight - btn.offsetHeight);
-            btn.style.left = x + 'px';
-            btn.style.top = y + 'px';
-            btn.style.marginLeft = '0';
-        }
-        function sayYes() {
-            document.getElementById('mainContent').style.display = 'none';
-            document.getElementById('message').style.display = 'block';
-            document.body.style.backgroundColor = '#ffcccc';
-        }
-    </script>
+</div>
+
+<script>
+    // បង្កើតបេះដូងហោះ
+    function createHeart() {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.innerHTML = '❤️';
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+        heart.style.opacity = Math.random();
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 5000);
+    }
+    setInterval(createHeart, 300);
+
+    // ឱ្យប៊ូតុង "ទេ" រត់គេច
+    function moveButton() {
+        const noBtn = document.getElementById('noBtn');
+        const x = Math.random() * (window.innerWidth - 100);
+        const y = Math.random() * (window.innerHeight - 50);
+        noBtn.style.left = x + 'px';
+        noBtn.style.top = y + 'px';
+    }
+
+    // នៅពេលចុច Yes
+    function sayYes() {
+        document.getElementById('mainContainer').innerHTML = `
+            <h1 style="font-size: 50px;">Yay! 🥰</h1>
+            <p style="font-size: 20px;">ខ្ញុំក៏ស្រឡាញ់អ្នកដែរ!</p>
+            <div style="font-size: 60px;">💖🌸✨</div>
+        `;
+    }
+</script>
+
 </body>
 </html>
