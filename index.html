@@ -3,18 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Saroeurn's Crib</title>
+    <title>Do You Love Me?</title>
     <style>
-        body { font-family: sans-serif; background-color: #0f0f0f; color: #00ff00; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-        .box { border: 2px solid #00ff00; padding: 40px; border-radius: 10px; text-align: center; box-shadow: 0 0 15px #00ff00; }
-        h1 { font-size: 2.5rem; text-transform: uppercase; letter-spacing: 5px; }
-        p { color: white; opacity: 0.7; }
+        body { display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background-color: #ffe6e6; font-family: sans-serif; overflow: hidden; }
+        .container { text-align: center; background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); width: 80%; }
+        h1 { color: #ff4d4d; font-size: 1.8rem; }
+        .buttons { margin-top: 30px; position: relative; height: 150px; }
+        button { padding: 12px 25px; font-size: 1.1rem; cursor: pointer; border: none; border-radius: 10px; transition: 0.2s; }
+        #yesBtn { background-color: #ff4d4d; color: white; position: relative; z-index: 10; }
+        #noBtn { background-color: #888; color: white; position: absolute; left: 50%; margin-left: 10px; }
+        .success-msg { display: none; font-size: 1.3rem; color: #ff4d4d; font-weight: bold; line-height: 1.6; }
     </style>
 </head>
 <body>
-    <div class="box">
-        <h1>SAROEURN CRIB</h1>
-        <p>This is my digital space.</p>
+    <div class="container">
+        <div id="mainContent">
+            <h1 id="question">តើអ្នកស្រឡាញ់ខ្ញុំទេ? ❤️</h1>
+            <div class="buttons">
+                <button id="yesBtn" onclick="sayYes()">បាទ/ចាស</button>
+                <button id="noBtn" onmouseover="moveButton()" onclick="moveButton()">ទេ</button>
+            </div>
+        </div>
+        <div id="message" class="success-msg">យេ! ខ្ញុំក៏ស្រឡាញ់អ្នកដែរ! 🥰<br>ជួបគ្នានៅថ្ងៃស្អែកណា៎!</div>
     </div>
+    <script>
+        function moveButton() {
+            const btn = document.getElementById('noBtn');
+            const x = Math.random() * (window.innerWidth - btn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - btn.offsetHeight);
+            btn.style.left = x + 'px';
+            btn.style.top = y + 'px';
+            btn.style.marginLeft = '0';
+        }
+        function sayYes() {
+            document.getElementById('mainContent').style.display = 'none';
+            document.getElementById('message').style.display = 'block';
+            document.body.style.backgroundColor = '#ffcccc';
+        }
+    </script>
 </body>
 </html>
